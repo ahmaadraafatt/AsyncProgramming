@@ -9,12 +9,14 @@ namespace CA5TaskContinuation
             //Console.WriteLine(CountPrimeNumberInRange(2, 2_000_000));
             Task<int> task = Task.Run(() => CountPrimeNumberInRange(2, 3_000_000));
             //Console.WriteLine(task); // BAD !! Couse its BLOCK the Threads
-            //Console.WriteLine("using , OnCompleted");
-            //var awaiter = task.GetAwaiter();
-            //awaiter.OnCompleted(()=>
-            //{
-            //    Console.WriteLine(awaiter.GetResult());
-            //});
+
+            Console.WriteLine("using , OnCompleted");
+            var awaiter = task.GetAwaiter();
+            awaiter.OnCompleted(() =>
+            {
+                Console.WriteLine(awaiter.GetResult());
+            });
+
             Console.WriteLine("Ahmed will be a fullStack Developer");
 
             Console.WriteLine("using Task Countiuewith");
@@ -27,12 +29,13 @@ namespace CA5TaskContinuation
             for (int i = min; i <= max; i++)
             {
                 var isprime = true;
-                var j = min;
+                var j = 2;
                 while (j <= (int)Math.Sqrt(i))
                 {
                     if (i % j == 0)
                     {
                         isprime = false;
+                        break;
                     }
                     ++j;
                 }
